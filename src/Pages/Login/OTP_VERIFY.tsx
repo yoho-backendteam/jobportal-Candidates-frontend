@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Logo_for_Login from "../../../src/assets/Container.png"
 import { FaArrowRightLong } from "react-icons/fa6"
-import { useNavigate } from "react-router-dom";
 
 const OTP_VERIFY = () => {
      

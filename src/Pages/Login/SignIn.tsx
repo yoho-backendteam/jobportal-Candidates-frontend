@@ -1,12 +1,12 @@
 import Logo_for_Login from "../../../src/assets/Container.png"
-import { COLORS, FONTS } from "../../Constants/uiConstants"
+import { FaArrowRightLong } from "react-icons/fa6"
 
 
 const SignIn = () => {
   return (
     <div className="">
       <div className=" h-screen m-3 rounded-lg">
-        <div className="min-h-screen bg-[#FC8019] flex items-center justify-center ">
+        <div className="min-h-screen bg-[#FC8019] rounded-lg flex items-center justify-center ">
           <div className="w-full max-w-sm bg-white p-8 rounded-2xl shadow-lg">
             <div className="flex flex-row  justify-center ">
               <img src={Logo_for_Login} className="w-15 h-15 " alt="" />
@@ -16,7 +16,7 @@ const SignIn = () => {
 
             <form className="space-y-4 mt-5">
               <div>
-                <label className="block mb-1 font-medium">Email?Phone *</label>
+                <label className="block mb-1 font-medium">Email/Phone *</label>
                 <input
                   type="email"
                   placeholder="Enter Your email or phone number"
@@ -44,9 +44,10 @@ const SignIn = () => {
               <button
 
                 type="submit"
-                className="w-full py-2 mt-3  text-white rounded-lg transition"
+                className="w-full py-2 mt-3 flex flex-row justify-center items-center gap-5 bg-[#FC8019]  text-white rounded-lg transition"
               >
                 Sign In
+                <FaArrowRightLong  size={20}/>
               </button>
             </form>
             <div className="mt-5">

@@ -1,23 +1,18 @@
-import Education from "../../assets/Education_Icon.png"
-import { FaArrowRightLong } from "react-icons/fa6"
+import Education from "../../assets/Education_Icon.png";
+import { FaArrowRightLong, FaArrowLeftLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { FaArrowLeftLong } from "react-icons/fa6";
-import { MdDateRange } from "react-icons/md";
-
+import { FiUpload } from "react-icons/fi";
 
 const Experience_Skills = () => {
-
     const navigate = useNavigate();
+
     const [errors, setErrors] = useState<any>({});
 
-
     const [formData, setFormData] = useState({
-        education: "",
-        institute: "",
-        graduationYear: "",
-        percentage: "",
-        major: ""
+        total_experience: "",
+        key_skills: "",
+        upload_resume: null as File | null,
     });
 
     const handleChange = (e: any) => {
@@ -27,48 +22,46 @@ const Experience_Skills = () => {
         });
     };
 
-    const handleSubmit = (e: any) => {
-        e.preventDefault();
-
+    const handleFileUpload = (e: any) => {
+        const file = e.target.files[0];
         let validationErrors: any = {};
 
-        const onlyLetters = /^[A-Za-z ]+$/;
-        const onlyLettersNumbers = /^[A-Za-z0-9 .,&()-]+$/;
-        const yearRegex = /^[0-9]{4}$/;
+        if (file) {
+            const allowedTypes = ["application/pdf",
+                "application/msword",
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            ];
 
-        if (!formData.education.trim()) {
-            validationErrors.education = "Education is required";
-        } else if (!onlyLetters.test(formData.education)) {
-            validationErrors.education = "Education must contain only letters";
+            if (!allowedTypes.includes(file.type)) {
+                validationErrors.upload_resume = "Only PDF, DOC, or DOCX files are allowed";
+                setErrors(validationErrors);
+                return;
+            }
         }
 
-        if (!formData.institute.trim()) {
-            validationErrors.institute = "Institute/University is required";
-        } else if (!onlyLettersNumbers.test(formData.institute)) {
-            validationErrors.institute = "Institute name is invalid";
+        setErrors({});
+        setFormData({ ...formData, upload_resume: file });
+    };
+
+    const handleSubmit = (e: any) => {
+        e.preventDefault();
+        let validationErrors: any = {};
+
+        if (!formData.total_experience.trim()) {
+            validationErrors.total_experience = "Total experience is required";
         }
 
-        if (!formData.graduationYear) {
-            validationErrors.graduationYear = "Graduation year is required";
-        } else if (!yearRegex.test(formData.graduationYear)) {
-            validationErrors.graduationYear = "Enter a valid  year";
+        if (!formData.key_skills.trim()) {
+            validationErrors.key_skills = "Key skills are required";
         }
 
-        const percentageValue = Number(formData.percentage);
-
-        if (!formData.percentage) {
-            validationErrors.percentage = "Percentage/CGPA is required";
-        } else if (isNaN(percentageValue)) {
-            validationErrors.percentage = "Percentage must be a valid number";
-        } else if (percentageValue < 0 || percentageValue > 100) {
-            validationErrors.percentage = "Enter a value between 0 and 100";
-        }
-
-
-        if (!formData.major.trim()) {
-            validationErrors.major = "Major is required";
-        } else if (!onlyLetters.test(formData.major)) {
-            validationErrors.major = "Major must contain only letters";
+        if (
+            formData.upload_resume &&
+            !["application/pdf", "application/msword",
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            ].includes(formData.upload_resume.type)
+        ) {
+            validationErrors.upload_resume = "Upload only PDF, DOC, or DOCX";
         }
 
         if (Object.keys(validationErrors).length > 0) {
@@ -76,117 +69,106 @@ const Experience_Skills = () => {
             return;
         }
 
-        navigate("/Educational_Details");
+        navigate("/Success");
     };
-
 
     return (
         <div className="">
-            <div className="h-screen m-3 rounded-lg">
-                <div className="min-h-screen bg-[#FC8019] rounded-lg flex items-center justify-center ">
+            <div className="h-screen  rounded-lg">
+                <div className="min-h-screen bg-[#FC8019] rounded-lg flex items-center justify-center">
 
-                    <div className="  bg-white p-8 rounded-2xl shadow-lg h-[90vh] w-[100vh] overflow-y-auto hide-scrollbar">
-                        <div className="flex flex-row justify-center ">
-                            <img src={Education} className="w-15 h-15" alt="" />
+                    <div className="bg-white p-4 rounded-2xl shadow-lg h-[90vh] w-[100vh] overflow-y-auto hide-scrollbar">
+
+                        <div className="flex justify-center">
+                            <img src={Education} className="w-16 h-16" alt="" />
                         </div>
 
                         <h2 className="text-2xl font-semibold text-center">Experience & Skills</h2>
-                        <p className="flex justify-center">Tell us about your professional journey</p>
+                        <p className="text-center">Tell us about your professional journey</p>
 
-                        <form className="space-y-4 mt-5" onSubmit={handleSubmit}>
+                        <form className="space-y-5 mt-5" onSubmit={handleSubmit}>
 
                             <div className="w-full">
                                 <label className="block mb-1 font-medium">Total Experience *</label>
                                 <input
-                                    name="education"
-                                    value={formData.education}
+                                    name="total_experience"
+                                    value={formData.total_experience}
                                     onChange={handleChange}
                                     type="text"
-                                    placeholder="Enter your education"
-                                    className="w-full  py-2 placeholder:bg-[#F3F3F5] placeholder:text-sm placeholder:text-gray-300 placeholder:p-5 placeholder:rounded-2xl rounded-lg focus:outline-none focus:border-[#FC8019]"
-                                    required
+                                    placeholder="E.g. 3 years, Fresher"
+                                    className="w-full py-2 px-3 bg-[#F3F3F5] rounded-lg placeholder:text-gray-400 focus:outline-none focus:border-[#FC8019]"
                                 />
+                                {errors.total_experience && (
+                                    <p className="text-red-500 text-sm">{errors.total_experience}</p>
+                                )}
                             </div>
 
                             <div className="w-full">
                                 <label className="block mb-1 font-medium">Key Skills *</label>
                                 <input
-                                    name="address"
-                                    value={formData.institute}
+                                    name="key_skills"
+                                    value={formData.key_skills}
                                     onChange={handleChange}
                                     type="text"
-                                    placeholder="Enter your institure/university"
-                                    className="w-full  py-2 placeholder:bg-[#F3F3F5] placeholder:text-sm placeholder:text-gray-300 placeholder:p-5 placeholder:rounded-2xl rounded-lg focus:outline-none focus:border-[#FC8019]"
-                                    required
+                                    placeholder="E.g. React, Node, Communication"
+                                    className="w-full py-2 px-3 bg-[#F3F3F5] rounded-lg placeholder:text-gray-400 focus:outline-none focus:border-[#FC8019]"
                                 />
-
-                            </div>
-
-                            <div className="flex flex-row gap-5 justify-between">
-                                <div className="w-full">
-                                    <label className="block mb-1 font-medium">Graduation Year  *</label>
-
-                                    <div className="relative w-full bg-[#F3F3F5] rounded-lg">
-                                        <MdDateRange className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xl" />
-
-                                        <input
-                                            name="graduation year"
-                                            value={formData.graduationYear}
-                                            onChange={handleChange}
-                                            type="number"
-                                            placeholder="Graduation Year"
-                                            className="w-full py-2 pl-10 pr-3 placeholder:text-sm placeholder:text-gray-300 rounded-lg focus:outline-none focus:border-[#FC8019] "
-                                            required
-                                        />
-                                    </div>
-
-                                    {errors.dateofbirth && (
-                                        <p className="text-red-500 text-sm">{errors.dateofbirth}</p>
-                                    )}
-                                </div>
-
-
-                                <div className="w-full">
-                                    <label className="block mb-1 font-medium">Percentage/CGPA *</label>
-                                    <input
-                                        name="percentage"
-                                        value={formData.percentage}
-                                        onChange={handleChange}
-                                        type="number"
-                                        placeholder="Your Percentage"
-                                        className="w-full  py-2 placeholder:bg-[#F3F3F5] placeholder:text-sm placeholder:text-gray-300 placeholder:p-5 placeholder:rounded-2xl rounded-lg focus:outline-none focus:border-[#FC8019]"
-                                        required
-                                    />
-                                    {errors.gender && (<p className="text-red-500 text-sm mt-1">{errors.gender}</p>)}
-
-                                </div>
+                                {errors.key_skills && (
+                                    <p className="text-red-500 text-sm">{errors.key_skills}</p>
+                                )}
                             </div>
 
                             <div className="w-full">
-                                <label className="block mb-1 font-medium">Specialization/Major (Optional) *</label>
-                                <input
-                                    name="Major"
-                                    value={formData.major}
-                                    onChange={handleChange}
-                                    type="text"
-                                    placeholder="Enter your major subject like Mechanical, Electrical"
-                                    className="w-full  py-2 placeholder:bg-[#F3F3F5] placeholder:text-sm placeholder:text-gray-300 placeholder:p-5 placeholder:rounded-2xl rounded-lg focus:outline-none focus:border-[#FC8019]"
-                                    required
-                                />
-                                {errors.pincode && (<p className="text-red-500 text-sm mt-1">{errors.pincode}</p>)}
+                                <label className="block mb-1 font-medium">Upload Resume (Optional)</label>
 
+                                <div
+                                    onClick={() => document.getElementById("resumeInput")?.click()}
+                                    className="w-full h-32 border-2 border-dashed border-gray-300 bg-[#FFFAF5]
+                   flex flex-col items-center justify-center rounded-xl cursor-pointer
+                   hover:border-[#FC8019] transition"
+                                >
+                                  <FiUpload className="w-10 h-10 text-gray-400" />
+                                    <p className="text-gray-500 mt-2">Click to upload resume</p>
+                                    <p className="text-xs text-gray-400">PDF, DOC (Max 5MB)</p>
+                                </div>
+
+                                <input
+                                    id="resumeInput"
+                                    name="upload_resume"
+                                    type="file"
+                                    accept=".pdf,.doc,.docx"
+                                    onChange={handleFileUpload}
+                                    className="hidden"
+                                />
+
+                                {errors.upload_resume && (
+                                    <p className="text-red-500 text-sm mt-1">{errors.upload_resume}</p>
+                                )}
+
+                                {formData.upload_resume && (
+                                    <p className="text-green-600 text-sm mt-1">
+                                        Uploaded: {formData.upload_resume.name}
+                                    </p>
+                                )}
                             </div>
 
-                            <div className="flex flex-col md:flex-row gap-3 mt-3">
-                                <button className="flex-1 flex justify-center items-center gap-5 py-2 bg-[#F3F3F5] text-black rounded-lg">
-                                    <FaArrowLeftLong size={20} />
-                                    Cancel
-                                </button>
-                                <button className="flex-1 flex justify-center items-center gap-5 py-2 bg-[#FC8019] text-white rounded-lg">
-                                    Continue
-                                    <FaArrowRightLong size={20} />
+
+                            <div className="flex flex-col md:flex-row gap-3 mt-5">
+                                <button
+                                    type="button"
+                                    className="flex-1 flex justify-center items-center gap-2 py-2 bg-[#F3F3F5] text-black rounded-lg"
+                                >
+                                    <FaArrowLeftLong size={18} />
+                                    Back
                                 </button>
 
+                                <button
+                                    type="submit"
+                                    className="flex-1 flex justify-center items-center gap-2 py-2 bg-[#FC8019] text-white rounded-lg"
+                                >
+                                    Continue
+                                    <FaArrowRightLong size={18} />
+                                </button>
                             </div>
 
                         </form>
@@ -195,7 +177,7 @@ const Experience_Skills = () => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Experience_Skills
+export default Experience_Skills;

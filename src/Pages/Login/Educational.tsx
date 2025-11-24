@@ -3,7 +3,6 @@ import { FaArrowRightLong } from "react-icons/fa6"
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { FaArrowLeftLong } from "react-icons/fa6";
-import { MdDateRange } from "react-icons/md";
 
 
 const Educational = () => {
@@ -82,10 +81,10 @@ const Educational = () => {
 
     return (
         <div className="">
-            <div className="h-screen m-3 rounded-lg">
+            <div className="h-screen  rounded-lg">
                 <div className="min-h-screen bg-[#FC8019] rounded-lg flex items-center justify-center ">
 
-                    <div className="  bg-white p-8 rounded-2xl shadow-lg h-[90vh] w-[100vh] overflow-y-auto hide-scrollbar">
+                    <div className="  bg-white p-4 rounded-2xl shadow-lg h-[90vh] w-[100vh] overflow-y-auto hide-scrollbar">
                         <div className="flex flex-row justify-center ">
                             <img src={Education} className="w-15 h-15" alt="" />
                         </div>
@@ -127,7 +126,7 @@ const Educational = () => {
                                     <label className="block mb-1 font-medium">Graduation Year  *</label>
 
                                     <div className="relative w-full bg-[#F3F3F5] rounded-lg">
-                                        <MdDateRange className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xl" />
+                                        {/* <MdDateRange className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xl" /> */}
 
                                         <input
                                             name="graduation year"
@@ -180,7 +179,7 @@ const Educational = () => {
                             <div className="flex flex-col md:flex-row gap-3 mt-3">
                                 <button className="flex-1 flex justify-center items-center gap-5 py-2 bg-[#F3F3F5] text-black rounded-lg">
                                     <FaArrowLeftLong size={20} />
-                                    Cancel
+                                    Back
                                 </button>
                                 <button className="flex-1 flex justify-center items-center gap-5 py-2 bg-[#FC8019] text-white rounded-lg">
                                     Continue

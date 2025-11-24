@@ -206,7 +206,7 @@ const Personal_Details = () => {
                             <div className="flex flex-col md:flex-row gap-3 mt-3">
                                 <button className="flex-1 flex justify-center items-center gap-5 py-2 bg-[#F3F3F5] text-black rounded-lg">
                                     <FaArrowLeftLong size={20} />
-                                    Cancel
+                                    Back
                                 </button>
                                 <button className="flex-1 flex justify-center items-center gap-5 py-2 bg-[#FC8019] text-white rounded-lg">
                                     Continue

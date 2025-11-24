@@ -7,6 +7,10 @@ import Otp_Verification from "./Pages/Login/Otp_Verification"
 import Personal_Details from "./Pages/Login/Personal_Details"
 import Educational from "./Pages/Login/Educational"
 import Experience_Skills from "./Pages/Login/Experience_Skills"
+import Success_Component from "./Pages/Login/Success_Component"
+import Change_Password from "./Pages/Login/Change_Password(new&old)"
+import CHANGEPASSWORD from "../src/Pages/Login/Change_Password"
+import OTP_VERIFY from "./Pages/Login/OTP_VERIFY"
 
 const App = () => {
   return (
@@ -21,6 +25,10 @@ const App = () => {
         <Route path="Personal_Details" element={<Personal_Details />} />
         <Route path="Educational_Details" element={<Educational />} />
         <Route path="Experience_Skills" element={<Experience_Skills />} />
+        <Route path="Success" element={<Success_Component />} />
+        <Route path="change_password_email" element={<CHANGEPASSWORD />} />
+        <Route path="OTP_Verify" element={<OTP_VERIFY />} />
+        <Route path="change_password" element={<Change_Password />} />
       </Routes>
     </BrowserRouter>
   )

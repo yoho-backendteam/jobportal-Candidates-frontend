@@ -6,7 +6,7 @@ const SignIn = () => {
   return (
     <div className="">
       <div className=" h-screen m-3 rounded-lg">
-        <div className="min-h-screen flex items-center justify-center ">
+        <div className="min-h-screen bg-[#FC8019] flex items-center justify-center ">
           <div className="w-full max-w-sm bg-white p-8 rounded-2xl shadow-lg">
             <div className="flex flex-row  justify-center ">
               <img src={Logo_for_Login} className="w-15 h-15 " alt="" />

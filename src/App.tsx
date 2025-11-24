@@ -1,9 +1,20 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import Joblist from "./Pages/Jobs/Joblist"
+import Jobcard from "./Pages/Jobs/Jobcard"
+import SignIn from "./Pages/Login/SignIn"
+import SignUp from "./Pages/Login/SignUp"
 
 const App = () => {
   return (
-    <div>
-      <h1 className="bg-amber-300">dlskd</h1>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<h1>Main Page</h1>}/>
+        <Route path="joblist" element={<Joblist/>}/>
+        <Route path="jobcard" element={<Jobcard/>}/>
+        <Route path="sign-in" element={<SignIn/>}/>
+        <Route path="sign-up" element={<SignUp/>}/>
+      </Routes>
+    </BrowserRouter>
   )
 }
 

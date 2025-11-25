@@ -12,7 +12,7 @@ const SignIn = () => {
               <img src={Logo_for_Login} className="w-15 h-15 " alt="" />
             </div>
             <h2 className="text-2xl font-semibold text-center">Sign In</h2>
-            <p className="flex items-center justify-center ">Join TalentHub  and start your carrer</p>
+            <p className="flex items-center justify-center text-[#45556C]">Join TalentHub  and start your carrer</p>
 
             <form className="space-y-4 mt-5">
               <div>
@@ -20,25 +20,23 @@ const SignIn = () => {
                 <input
                   type="email"
                   placeholder="Enter Your email or phone number"
-                  className="w-full px-4 py-2 placeholder:bg=[#F3F3F5] placeholder:text-sm placeholder:text-gray-300 rounded-lg focus:outline-none focus:border-[#FC8019]"
+                  className="w-full px-4 py-2 placeholder:bg=[#F3F3F5] placeholder:text-sm placeholder:text-gray-300 bg-[#F3F3F5] rounded-lg focus:outline-none focus:border-[#FC8019]"
                   required
                 />
               </div>
 
               <div>
-                <label className="block mb-1 font-medium">Password *</label>
+                <label className="block font-medium">Password *</label>
                 <input
                   type="password"
                   placeholder="**********"
-                  className="w-full px-4 py-2 placeholder:bg=[#F3F3F5] placeholder:text-sm placeholder:text-gray-300  rounded-lg focus:outline-none focus:border-[#FC8019]"
+                  className="w-full px-4 py-2 placeholder:bg=[#F3F3F5] placeholder:text-sm placeholder:text-gray-300 bg-[#F3F3F5]  rounded-lg focus:outline-none focus:border-[#FC8019]"
                   required
                 />
               </div>
 
 
-              <div className="flex justify-end">
-                <label className="block mb-1 font-medium">Forget Password?</label>
-              </div>
+                <p className="block mb-1 cursor-pointer text-[#717182] text-end">Forget Password?</p>
 
 
               <button
@@ -51,7 +49,7 @@ const SignIn = () => {
               </button>
             </form>
             <div className="mt-5">
-              <p className="flex items-center justify-center" >Don"t have an account? <span className="text-[#0052CC]">Sign Up</span></p>
+              <p className="flex items-center justify-center" >Don"t have an account ? &nbsp; <span className="text-[#0052CC] cursor-pointer"> Sign Up</span></p>
             </div>
 
           </div>

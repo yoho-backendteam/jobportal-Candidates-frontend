@@ -4,6 +4,7 @@ import Workmode from "../../assets/Jobs/Workmode.png";
 import Experience from "../../assets/Jobs/Experience.png";
 import Package from "../../assets/Jobs/Package.png";
 import Chkpoint from "../../assets/Jobs/chkpoint.png";
+import { FaRupeeSign } from "react-icons/fa";
 
 const Jobcard = () => {
   return (
@@ -144,7 +145,24 @@ const Jobcard = () => {
 
         <div className="w-full lg:w-[35%]">
           {/* Sidebar */}
-          <div className=" h-[200px] bg-amber-300 rounded-2xl"></div>
+          {/* <div className=" bg-amber-300 rounded-2xl p-3"> */}
+          <div className="border-t-[#FFDDC5] border-l-[#FFA36380] border-r-[#FFA36380]   border-[3px] border-b-0  rounded-t-4xl  rounded-bl-4xl rounded-br-4xl p-5">
+            <p className="text-[24px] font-bold flex gap-1 items-center"><span><FaRupeeSign /></span>18-25 LPA</p>
+            <p className="text-[14px] text-[#45556C]">Per Annum</p>
+            <div className="mt-4 ">
+              <p className="p-3 flex items-center justify-center rounded-lg bg-[#FC8019] text-[#ffffff] w-full"> Apply for this Position</p>
+            </div>
+            <div className="mt-4 space-y-1.5">
+              <p className="flex justify-between"><span className="text-[14px] text-[#45556C]">Job Type</span><span className="text-[14px] text-[#0F172B]">Full-Time</span></p>
+              <p className="flex justify-between"><span className="text-[14px] text-[#45556C]">Work Mode</span><span className="text-[14px] text-[#0F172B]">Remote</span></p>
+              <p className="flex justify-between"><span className="text-[14px] text-[#45556C]">Experience</span><span className="text-[14px] text-[#0F172B]">3-5 years</span></p>
+              <p className="flex justify-between"><span className="text-[14px] text-[#45556C]">Department</span><span className="text-[14px] text-[#0F172B]">Engineering</span></p>
+            </div>
+            <div className="mt-4">
+              <p className="text-[14px] text-[#62748E]">Application Deadline:28/02/2025</p>
+              <p className="text-[14px] text-[#62748E]">23 people have applied</p>
+            </div>
+          </div>
 
           <div className="border-2 my-6 p-4 border-[#E2E8F0] rounded-2xl">
             <h1 className="text-[#0F172B] text-2xl mb-5">

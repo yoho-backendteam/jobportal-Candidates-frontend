@@ -85,14 +85,14 @@ const handleSubmit = (e: any) => {
             <form className="space-y-4 mt-5" onSubmit={handleSubmit}>
               
               <div>
-                <label className="block mb-1 font-medium">Full Name</label>
+                <label className="block mb-1 font-medium">Full Name *</label>
                 <input
                   name="fullName"
                   value={formData.fullName}
                   onChange={handleChange}
                   type="text"
                   placeholder="Enter your full name"
-                  className="w-full px-4 py-2 rounded-lg focus:outline-none focus:border-[#FC8019]"
+                  className="w-full px-4 py-2 bg-[#F3F3F5] placeholder:text-gray-300 rounded-lg focus:outline-none focus:border-[#FC8019]"
                   required
                 />
                 {errors.fullName && (<p className="text-red-500 text-sm mt-1">{errors.fullName}</p>)}
@@ -100,14 +100,14 @@ const handleSubmit = (e: any) => {
               </div>
 
               <div>
-                <label className="block mb-1 font-medium">Email Address</label>
+                <label className="block mb-1 font-medium">Email Address *</label>
                 <input
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
                   type="email"
                   placeholder="Enter your email address"
-                  className="w-full px-4 py-2 rounded-lg focus:outline-none focus:border-[#FC8019]"
+                  className="w-full px-4 py-2 bg-[#F3F3F5] placeholder:text-gray-300 rounded-lg focus:outline-none focus:border-[#FC8019]"
                   required
                 />
                 {errors.email && (<p className="text-red-500 text-sm mt-1">{errors.email}</p>)}
@@ -115,14 +115,14 @@ const handleSubmit = (e: any) => {
               </div>
 
               <div>
-                <label className="block mb-1 font-medium">Phone Number</label>
+                <label className="block mb-1 font-medium">Phone Number *</label>
                 <input
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
                   type="text"
                   placeholder="Enter phone number"
-                  className="w-full px-4 py-2 rounded-lg focus:outline-none focus:border-[#FC8019]"
+                  className="w-full px-4 py-2 bg-[#F3F3F5] placeholder:text-gray-300 rounded-lg focus:outline-none focus:border-[#FC8019]"
                   required
                 />
                 {errors.phone && (<p className="text-red-500 text-sm mt-1">{errors.phone}</p>)}
@@ -137,7 +137,7 @@ const handleSubmit = (e: any) => {
                   onChange={handleChange}
                   type="password"
                   placeholder="Create a strong password"
-                  className="w-full px-4 py-2 pr-10 rounded-lg focus:outline-none focus:border-[#FC8019]"
+                  className="w-full px-4 py-2 bg-[#F3F3F5] placeholder:text-gray-300 pr-10 rounded-lg focus:outline-none focus:border-[#FC8019]"
                   required
                 />
                 <FiEye className="absolute right-3 top-10 text-gray-400 cursor-pointer" />
@@ -153,7 +153,7 @@ const handleSubmit = (e: any) => {
                   onChange={handleChange}
                   type="password"
                   placeholder="Re-enter the password"
-                  className="w-full px-4 py-2 pr-10 rounded-lg focus:outline-none focus:border-[#FC8019]"
+                  className="w-full px-4 py-2 pr-10 bg-[#F3F3F5] placeholder:text-gray-300 rounded-lg focus:outline-none focus:border-[#FC8019]"
                   required
                 />
                 <FiEye className="absolute right-3 top-10 text-gray-400 cursor-pointer" />

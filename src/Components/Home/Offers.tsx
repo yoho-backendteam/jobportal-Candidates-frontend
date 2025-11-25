@@ -11,10 +11,12 @@ import Decline from "../../assets/Home/Home_Offer_decline.png"
 import { useState } from "react"
 import Success from "../../assets/Home/Confirmation_icon.png"
 import decline from "../../assets/Home/Confirmation_decline_icon.png"
+import doubletick from "../../assets/Home/Double_tick.png"
 
 const Offers = () => {
   const [page, setpage] = useState(false)
   const [declinepage, setdeclinepage] = useState(false)
+  const [success, setsuccess] = useState(false)
   return (
     <div>
       <div className='flex-flex-col gap-4 bg-[#FF5200] text-white mt-10 rounded-t-2xl p-5'>
@@ -73,7 +75,7 @@ const Offers = () => {
         </div>
       </div>
 
-      <div className="flex flex-row p-2 border-[#E9E9EB] bg-[#F9F9F9] gap-5 rounded-xl">
+      {!success && <div className="flex flex-row p-2 border-[#E9E9EB] bg-[#F9F9F9] gap-5 rounded-xl">
         <img src={offer} className=" w-12 h-12" alt="" />
         <div className="flex flex-row justify-between items-center   w-full">
           <div className=" ">
@@ -87,7 +89,15 @@ const Offers = () => {
             </button>
           </div>
         </div>
-      </div>
+      </div>}
+
+      {success && <div className="border border-[#60B24633] bg-[#60B2461A] flex  gap-5 rounded-xl px-5 py-2">
+       <img src={doubletick} className="w-10" alt="" />
+        <div>
+          <p className="text-2xl text-gray-800 font-bold">Offer Accept Successfully!</p>
+          <p className="text-md text-gray-400">Plesae upload required document to complete your onboarding</p>
+        </div>
+      </div>}
 
       <div className="flex gap-5 mt-10">
         <button onClick={() => setpage(true)} className="w-full rounded-lg bg-[#60B246] flex items-center justify-center text-white gap-2"><span><img src={Accept} alt="" className="w-10 p-2" /></span> Accept Offer</button>
@@ -113,7 +123,7 @@ const Offers = () => {
               >
                 Cancel
               </button>
-              <button className="w-full rounded-lg bg-[#60B246] text-white p-2">
+              <button onClick={() => (setsuccess(true), setpage(false))} className="w-full rounded-lg bg-[#60B246] text-white p-2">
                 Yes, Accept
               </button>
             </div>

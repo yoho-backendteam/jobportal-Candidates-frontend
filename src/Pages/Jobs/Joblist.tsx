@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ContainerImage from "../../assets/jobs/Container.png";
-import Container2 from "../../assets/jobs/Container2.png";
+import ContainerBgImg from "../../assets/jobs/ContainerBG.png";
 import Container3 from "../../assets/jobs/Container3.png";
 import Container4 from "../../assets/jobs/Container4.png";
 import Container5 from "../../assets/jobs/Container5.png";
@@ -30,52 +30,46 @@ const Joblist = () => {
           flex flex-col justify-center items-center
           rounded-xl gap-5 mt-4 px-4 text-center 
         "
-        style={{ backgroundImage: `url(${Container2})` }}
+        style={{ backgroundImage: `url(${ContainerBgImg})` }}
       >
         <div className="px-4 py-2 rounded-[20px] sm:h-10  md:h-10 h-10  bg-white/15  text-white font-medium shadow-md border border-white/25 flex items-center gap-2">
           <img src={Icon10} alt="" className="w-4 h-4 sm:h-5 md:h-5 " />
           <span className="text-sm sm:text-lg">5 premium opportunities available</span>
         </div>
 
-        <h1 className="text-lg sm:text-5xl md:text-6xl font-extrabold text-white">
-          Find Your Dream Career
-        </h1>
+  <h1 className="text-lg sm:text-5xl md:text-6xl font-extrabold text-white">
+    Find Your Dream Career
+  </h1>
 
-        <p className="text-white text-sm sm:text-base">
-          Discover opportunities that match your skills and ambitions
-        </p>
+  <p className="text-white text-sm sm:text-base">
+    Discover opportunities that match your skills and ambitions
+  </p>
 
+  <div className="sm:max-w-[766px] w-full h-10 sm:h-15 bg-white rounded-xl flex items-center px-2 sm:px-5 gap-2 sm:gap-4 border border-gray-300 flex-nowrap">
+    <input
+      type="text"
+      placeholder="Job Title, Keywords, or Company"
+      className="flex-1 w-full placeholder:text-xs sm:placeholder:text-md outline-none text-xs sm:text-lg"
+    />
 
-        <div className="sm:max-w-[766px] w-full h-10 sm:h-15 bg-white rounded-xl flex items-center 
-                px-2 sm:px-5 gap-2 sm:gap-4 border border-gray-300 flex-nowrap">
+    <div className="hidden sm:block w-0.5 h-1/2 bg-gray-300"></div>
 
-          <input
-            type="text"
-            placeholder="Job Title, Keywords, or Company"
-            className="flex-1 w-full placeholder:text-xs sm:placeholder:text-md 
-               outline-none text-xs sm:text-lg"
-          />
+    <div className="flex sm:w-40 w-20 items-center gap-1 sm:gap-2">
+      <img src={Icon2} alt="" className="w-4 h-4 sm:w-5 sm:h-5" />
+      <input
+        type="text"
+        placeholder="Location"
+        className="flex-1 placeholder:text-xs outline-none sm:placeholder:text-md"
+      />
+    </div>
 
-          <div className="hidden sm:block w-0.5 h-1/2 bg-gray-300"></div>
+    <button className="bg-[#FC8019] px-2 py-2 sm:w-25 w-16 rounded-xl text-white flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm">
+      <img src={Icon11} alt="icon" className="w-4 h-4 sm:w-5 sm:h-5" />
+      <span className="hidden sm:block">Search</span>
+    </button>
+  </div>
+</div>
 
-          <div className="flex sm:w-40 w-20 items-center gap-1 sm:gap-2">
-            <img src={Icon2} alt="" className="w-4 h-4 sm:w-5 sm:h-5" />
-            <input
-              type="text"
-              placeholder="Location"
-              className="flex-1 placeholder:text-xs outline-none sm:placeholder:text-md"
-            />
-          </div>
-
-          <button className="bg-[#FC8019] px-2 py-2 sm:w-25 w-16 rounded-xl text-white 
-                     flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm">
-            <img src={Icon11} alt="icon" className="w-4 h-4 sm:w-5 sm:h-5" />
-            <span className="hidden sm:block">Search</span>
-          </button>
-
-        </div>
-
-      </div>
 
       <div className="w-full mt-5 sm:mt-10 flex flex-col gap-5">
         <div className="flex flex-wrap sm:flex-row  gap-3 items-center">

@@ -53,7 +53,7 @@ const StageCard: React.FC<StageData> = ({
       <div className="flex flex-col items-center">
         <img src={getIcon()} className="w-5 h-5" />
         <div
-          className="flex-1 w-[2px] mt-1"
+          className="flex-1 w-0.5 mt-1"
           style={{ backgroundColor: lineColor }}
         />
       </div>

@@ -29,21 +29,27 @@ const SignUp = () => {
     e.preventDefault();
     let validationErrors: any = {};
 
-    if (!formData.fullName.trim()) validationErrors.fullName = "Full name is required";
+    if (!formData.fullName.trim())
+      validationErrors.fullName = "Full name is required";
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!formData.email) validationErrors.email = "Email is required";
-    else if (!emailRegex.test(formData.email)) validationErrors.email = "Enter a valid email address";
+    else if (!emailRegex.test(formData.email))
+      validationErrors.email = "Enter a valid email address";
 
     const phoneRegex = /^[0-9]{10}$/;
     if (!formData.phone) validationErrors.phone = "Phone number is required";
-    else if (!phoneRegex.test(formData.phone)) validationErrors.phone = "Phone number must be 10 digits";
+    else if (!phoneRegex.test(formData.phone))
+      validationErrors.phone = "Phone number must be 10 digits";
 
     if (!formData.password) validationErrors.password = "Password is required";
-    else if (formData.password.length < 6) validationErrors.password = "Password must be at least 6 characters";
+    else if (formData.password.length < 6)
+      validationErrors.password = "Password must be at least 6 characters";
 
-    if (!formData.confirmPassword) validationErrors.confirmPassword = "Confirm your password";
-    else if (formData.password !== formData.confirmPassword) validationErrors.confirmPassword = "Passwords do not match";
+    if (!formData.confirmPassword)
+      validationErrors.confirmPassword = "Confirm your password";
+    else if (formData.password !== formData.confirmPassword)
+      validationErrors.confirmPassword = "Passwords do not match";
 
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
@@ -60,13 +66,19 @@ const SignUp = () => {
           <img src={Logo_for_Login} alt="Logo" className="w-16 h-16" />
         </div>
 
-        <h2 className="text-2xl font-semibold text-center mb-2">Create Account</h2>
-        <p className="text-center text-[#717182] mb-6">Join TalentHub and start your career</p>
+        <h2 className="text-2xl font-semibold text-center mb-2">
+          Create Account
+        </h2>
+        <p className="text-center text-[#717182] mb-6">
+          Join TalentHub and start your career
+        </p>
 
         <form className="space-y-4" onSubmit={handleSubmit}>
           {/* Full Name */}
           <div>
-            <label className="block mb-1 font-medium text-[#717182]">Full Name *</label>
+            <label className="block mb-1 font-medium text-[#717182]">
+              Full Name *
+            </label>
             <input
               name="fullName"
               value={formData.fullName}
@@ -75,12 +87,16 @@ const SignUp = () => {
               placeholder="Enter your full name"
               className="w-full px-4 py-2 bg-[#F3F3F5] text-[#717182] rounded-lg focus:outline-none focus:border-[#FC8019]"
             />
-            {errors.fullName && <p className="text-red-500 text-sm mt-1">{errors.fullName}</p>}
+            {errors.fullName && (
+              <p className="text-red-500 text-sm mt-1">{errors.fullName}</p>
+            )}
           </div>
 
           {/* Email */}
           <div>
-            <label className="block mb-1 font-medium text-[#717182]">Email Address *</label>
+            <label className="block mb-1 font-medium text-[#717182]">
+              Email Address *
+            </label>
             <input
               name="email"
               value={formData.email}
@@ -89,12 +105,16 @@ const SignUp = () => {
               placeholder="Enter your email address"
               className="w-full px-4 py-2 bg-[#F3F3F5] text-[#717182] rounded-lg focus:outline-none focus:border-[#FC8019]"
             />
-            {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+            {errors.email && (
+              <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+            )}
           </div>
 
           {/* Phone */}
           <div>
-            <label className="block mb-1 font-medium text-[#717182]">Phone Number *</label>
+            <label className="block mb-1 font-medium text-[#717182]">
+              Phone Number *
+            </label>
             <input
               name="phone"
               value={formData.phone}
@@ -103,12 +123,16 @@ const SignUp = () => {
               placeholder="Enter phone number"
               className="w-full px-4 py-2 bg-[#F3F3F5] text-[#717182] rounded-lg focus:outline-none focus:border-[#FC8019]"
             />
-            {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
+            {errors.phone && (
+              <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+            )}
           </div>
 
           {/* Password */}
           <div className="relative">
-            <label className="block mb-1 font-medium text-[#717182]">Password *</label>
+            <label className="block mb-1 font-medium text-[#717182]">
+              Password *
+            </label>
             <input
               name="password"
               value={formData.password}
@@ -123,12 +147,16 @@ const SignUp = () => {
             >
               {showPassword ? <FiEyeOff /> : <FiEye />}
             </span>
-            {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
+            {errors.password && (
+              <p className="text-red-500 text-sm mt-1">{errors.password}</p>
+            )}
           </div>
 
           {/* Confirm Password */}
           <div className="relative">
-            <label className="block mb-1 font-medium text-[#717182]">Confirm Password *</label>
+            <label className="block mb-1 font-medium text-[#717182]">
+              Confirm Password *
+            </label>
             <input
               name="confirmPassword"
               value={formData.confirmPassword}
@@ -143,7 +171,11 @@ const SignUp = () => {
             >
               {showConfirmPassword ? <FiEyeOff /> : <FiEye />}
             </span>
-            {errors.confirmPassword && <p className="text-red-500 text-sm mt-1">{errors.confirmPassword}</p>}
+            {errors.confirmPassword && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.confirmPassword}
+              </p>
+            )}
           </div>
 
           {/* Submit Button */}
@@ -159,7 +191,13 @@ const SignUp = () => {
         {/* Sign In Link */}
         <div className="mt-5 text-center text-[#717182]">
           <p>
-            Already have an account ? <span className="text-[#0052CC] cursor-pointer">Sign In</span>
+            Already have an account ?{" "}
+            <span
+              onClick={() => navigate("/signin")}
+              className="text-[#0052CC] cursor-pointer"
+            >
+              Sign In
+            </span>
           </p>
         </div>
       </div>

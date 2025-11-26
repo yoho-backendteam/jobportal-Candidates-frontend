@@ -1,24 +1,55 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const authSlice = createSlice({
-    name: 'auth',
-    initialState: {
-        isAuthenticated: false,
-        user: null,
-        token: null,
+  name: "auth",
+  initialState: {
+    isAuthenticated: false,
+    user: null,
+    token: null,
+
+    otpSent: false,
+    otpResent: false,
+    otpVerified: false,
+    loading: false,
+    error: null,
+    resetSuccess: false,
+  },
+
+  reducers: {
+    signin(state, action) {
+      state.isAuthenticated = true;
+      state.user = action.payload.user;
+      state.token = action.payload.token;
     },
-    reducers: {
-        login(state, action) {
-            state.isAuthenticated = true;
-            state.user = action.payload.user;
-            state.token = action.payload.token;
-        },
-        logout(state) {
-            state.isAuthenticated = false;
-            state.user = null;
-            state.token = null;
-        }
+    setOtpLoading(state, action) {
+      state.loading = action.payload;
     },
-}); 
-export const { login, logout } = authSlice.actions;
+    setOtpSent(state, action) {
+      state.otpSent = action.payload;
+    },
+    setOtpResent(state, action) {
+      state.otpResent = action.payload;
+    },
+    setOtpVerified(state, action) {
+      state.otpVerified = action.payload;
+    },
+    setOtpError(state, action) {
+      state.error = action.payload;
+    },
+    setResetSuccess(state, action) {
+      state.resetSuccess = action.payload;
+    },
+  },
+});
+
+export const {
+  signin,
+  setOtpLoading,
+  setOtpSent,
+  setOtpResent,
+  setOtpVerified,
+  setOtpError,
+  setResetSuccess,
+} = authSlice.actions;
+
 export default authSlice.reducer;

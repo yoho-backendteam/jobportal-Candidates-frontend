@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from '../features/auth/reducers/Slice';
+import jobsReducer from '../features/jobs/reducers/Slice';
 
 const store = configureStore({
     reducer: {
         auth: authReducer,
+        jobsReducer:jobsReducer
     },
 });
 

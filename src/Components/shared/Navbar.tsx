@@ -5,7 +5,7 @@ import { useAuth } from '../../context/AuthContext';
 
 const Navbar = () => {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
-  const { logout } = useAuth();
+  const {isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
 
   const handleConfirmLogout = () => {
@@ -27,10 +27,10 @@ const Navbar = () => {
         <div className="flex items-center gap-4">
           <div className="flex gap-4 **:cursor-pointer">
             <Link to={"/"}>Jobs</Link>
-            <Link to={"/applications"}>Applications</Link>
+            {isAuthenticated && <Link to={"/applications"}>Applications</Link>}
+            
           </div>
-
-          <div className="flex items-center gap-4 border-2 px-4 py-1 border-[#E9E9EB] rounded-lg bg-[#F9F9F9]">
+          {isAuthenticated && <><div className="flex items-center gap-4 border-2 px-4 py-1 border-[#E9E9EB] rounded-lg bg-[#F9F9F9]">
             <section className="h-[35px] w-[35px] bg-orange-400 rounded-full flex justify-center items-center text-lg text-white">
               M
             </section>
@@ -48,7 +48,10 @@ const Navbar = () => {
           >
             <img src={Logout} alt="logouticon" className="h-6" />
             <span>Logout</span>
-          </div>
+          </div></>}
+          
+
+
         </div>
       </nav>
 

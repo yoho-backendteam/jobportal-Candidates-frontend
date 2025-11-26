@@ -25,8 +25,8 @@ const httpEndPoints = {
 		create: 'api/jobs',
 		getAll: 'api/jobs',
 		getById: 'api/jobs/:id',
-		update: 'api/jobs/apply/:id',
 	},
+
 	//applications
 	applications: {
 		//candidate
@@ -35,6 +35,20 @@ const httpEndPoints = {
 		getById: 'api/applications/:id',
 		update: 'api/applications/:id',
 		delete: 'api/applications/:id',
+		updateOffer: 'api/applications/:id/offer-status',
+		updateDocument: 'api/applications/:id/update-document',
+		uploadDocuments: 'api/applications/:id/upload-documents',
+		applicationTimeline: 'api/applications/:id/timeline',
+
+		//hr
+		getAllApplications: 'api/applications',
+		getApplicationsByJob: 'api/applications/job/:jobId',
+		updateApplicationStatus: 'api/appications/:id/status',
+		scheduleInterview: 'api/applications/:id/schedule-interview',
+		reScheduleInterview: 'api/applications/:id/reschedule-interview',
+		sendOffer: 'api/applications/:id/send-offer',
+		verifyDocument: 'api/applications/:id/verify-document',
+		onboard: 'api/applications/:id/onboard',
 	},
 };
 

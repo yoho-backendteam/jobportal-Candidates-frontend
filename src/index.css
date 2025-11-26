@@ -1,14 +1,14 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-*{
-    font-family: "Alexandria", sans-serif;
+* {
+	font-family: 'Alexandria', sans-serif;
 }
 
 .hide-scrollbar::-webkit-scrollbar {
-  display: none;
+	display: none;
 }
 
 .hide-scrollbar {
-  -ms-overflow-style: none;  
-  scrollbar-width: none;    
+	-ms-overflow-style: none;
+	scrollbar-width: none;
 }

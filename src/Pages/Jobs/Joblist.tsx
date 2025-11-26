@@ -150,7 +150,7 @@ const Joblist = () => {
             <span className="text-md sm:text-sm">View details </span><img src={Icon12} alt="" className="w-4 h-4 sm:text-sm" />
           </div>
 
-          <div className="rounded-lg px-5 py-2 bg-[#FC8019] text-white sm:text-sm sm:text-green-500 sm:flex-row flex-row text-sm flex items-center gap-2 cursor-pointer">
+          <div className="rounded-lg px-5 py-2 bg-[#FC8019] text-white sm:text-sm sm:text-white sm:flex-row flex-row text-sm flex items-center gap-2 cursor-pointer">
             <img src={Icon13} alt="" className="w-4 h-4 sm:text-sm " />
             <span className="text-md sm:text-sm">Quick Apply</span>
           </div>

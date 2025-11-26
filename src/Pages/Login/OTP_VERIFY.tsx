@@ -1,64 +1,101 @@
-import { useState } from "react";
+import { useState, useEffect, type ChangeEvent, type FormEvent } from "react";
 import Logo_for_Login from "../../../src/assets/Container.png";
 import { FaArrowRightLong } from "react-icons/fa6";
+import { useDispatch } from "react-redux";
+import {
+  verifyOtpThunk,
+  resendOtpThunk,
+} from "../../features/auth/reducers/thunk";
+import { useNavigate } from "react-router-dom";
+import type { AppDispatch } from "../../store/store";
+import { toast } from "react-toastify";
 
 const OTP_VERIFY = () => {
-  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+  const [otp, setOtp] = useState<string[]>(["", "", "", "", "", ""]);
+  const [timer, setTimer] = useState(120);
+  const [canResend, setCanResend] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+
+  const email = localStorage.getItem("resetEmail") || undefined;
+  const serverOtp = localStorage.getItem("serverOtp");
+  useEffect(() => {
+    if (timer === 0) {
+      setCanResend(true);
+      return;
+    }
+
+    const interval = setInterval(() => {
+      setTimer((prev) => prev - 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [timer]);
+
+  const formatTime = (seconds: number) => {
+    const m = Math.floor(seconds / 60)
+      .toString()
+      .padStart(2, "0");
+    const s = (seconds % 60).toString().padStart(2, "0");
+    return `${m}:${s}`;
+  };
+  const handleResend = async () => {
+    try {
+      const res = await dispatch(
+        resendOtpThunk({
+          email: email,
+        })
+      );
+      if (res?.otp) {
+        localStorage.setItem("serverOtp", res.otp);
+      }
+      toast.success("OTP Resent Successfully!");
+      setTimer(120);
+      setCanResend(false);
+    } catch (err) {
+      toast.error("Failed to resend OTP");
+    }
+  };
+  const handleChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
     const value = e.target.value;
-
-    // Accept only numbers
     if (!/^[0-9]?$/.test(value)) return;
 
     const updated = [...otp];
     updated[index] = value;
     setOtp(updated);
 
-    // Move to next input if a number is typed
     if (value && index < 5) {
-      const nextInput = document.getElementById(`otp-${index + 1}`);
+      const nextInput = document.getElementById(
+        `otp-${index + 1}`
+      ) as HTMLInputElement;
       nextInput?.focus();
     }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
-    const key = e.key;
-
-    if (key === "Backspace") {
-      const updated = [...otp];
-      if (updated[index]) {
-        // Clear current input
-        updated[index] = "";
-        setOtp(updated);
-      } else if (index > 0) {
-        // Move to previous input
-        const prevInput = document.getElementById(`otp-${index - 1}`);
-        prevInput?.focus();
-      }
-    }
-
-    if (key === "ArrowLeft" && index > 0) {
-      const prevInput = document.getElementById(`otp-${index - 1}`);
-      prevInput?.focus();
-    }
-
-    if (key === "ArrowRight" && index < 5) {
-      const nextInput = document.getElementById(`otp-${index + 1}`);
-      nextInput?.focus();
-    }
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const otpValue = otp.join("");
+
     if (otpValue.length !== 6) {
-      alert("Please enter a 6-digit OTP");
+      toast.error("Enter 6-digit OTP");
       return;
     }
-    // Submit OTP here
-    console.log("OTP Submitted:", otpValue);
-    // navigate("/Personal_Details");
+
+    try {
+      await dispatch(
+        verifyOtpThunk({
+          email: email,
+          otp: otpValue,
+          type: "reset",
+        })
+      );
+
+      toast.success("OTP Verified Successfully!");
+      navigate("/change-password", { state: { email } });
+    } catch (error) {
+      toast.error("Invalid OTP");
+    }
   };
 
   return (
@@ -69,7 +106,16 @@ const OTP_VERIFY = () => {
         </div>
 
         <h2 className="text-2xl font-semibold text-center mb-1">OTP Verify</h2>
-        <p className="text-center text-[#45556C] mb-6">Join TalentHub and start your career</p>
+
+        {serverOtp && (
+          <p className="text-center text-green-600 font-semibold mb-3">
+            Server OTP: {serverOtp}
+          </p>
+        )}
+
+        <p className="text-center text-[#45556C] mb-6">
+          Enter the OTP sent to your email
+        </p>
 
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div className="flex justify-center items-center gap-2 mb-4">
@@ -80,23 +126,35 @@ const OTP_VERIFY = () => {
                 maxLength={1}
                 value={digit}
                 onChange={(e) => handleChange(e, index)}
-                onKeyDown={(e) => handleKeyDown(e, index)}
-                className="w-12 h-14 text-center text-xl bg-[#F3F3F5] rounded-lg focus:outline-none focus:border-[#FC8019]"
+                className="w-12 h-14 text-center text-xl bg-[#F3F3F5] rounded-lg focus:outline-none"
                 type="text"
-                inputMode="numeric"
-                pattern="[0-9]*"
               />
             ))}
           </div>
 
-          <p className="text-center text-gray-400 text-sm mb-4">Demo code: 289981</p>
+          {/* TIMER + RESEND */}
+          <div className="text-center mb-4">
+            {!canResend ? (
+              <p className="text-gray-600 text-sm">
+                Resend OTP in{" "}
+                <span className="font-semibold">{formatTime(timer)}</span>
+              </p>
+            ) : (
+              <button
+                type="button"
+                onClick={handleResend}
+                className="text-[#FC8019] font-semibold"
+              >
+                Resend OTP
+              </button>
+            )}
+          </div>
 
           <button
             type="submit"
             className="w-full py-2 mt-4 flex justify-center items-center gap-3 bg-[#FC8019] text-white rounded-xl transition"
           >
-            Submit
-            <FaArrowRightLong size={20} />
+            Submit <FaArrowRightLong size={20} />
           </button>
         </form>
       </div>

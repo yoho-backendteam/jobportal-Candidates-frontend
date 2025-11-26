@@ -23,7 +23,7 @@ const Change_Password = () => {
                                     <MdOutlineMail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xl" />
 
                                     <input
-                                        type="email"
+                                        type="text"
                                         placeholder="Enter your email or phone number"
                                         className="w-full pl-10 pr-4 py-2 bg-[#F3F3F5] text-sm rounded-lg 
                  placeholder:text-gray-400 focus:outline-none focus:ring-2 

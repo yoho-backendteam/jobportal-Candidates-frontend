@@ -12,10 +12,10 @@ const Axios = axios.create({
 });
 
 Axios.interceptors.request.use((config) => {
-	const token = GetLocalStorage('candidateToken');
+	const token = GetLocalStorage('candidateAuthToken');
 
 	if (token) {
-		config.headers['Authorization'] = `Token ${token}`;
+		config.headers['Authorization'] = `${token}`;
 	}
 	return config;
 });
@@ -24,8 +24,8 @@ Axios.interceptors.response.use(
 	(response) => response,
 	(error) => {
 		if (error?.response && error?.response.status == 401) {
-			ClearLocalStorage();
-			window.location.reload();
+			// ClearLocalStorage();
+			// window.location.reload();
 		}
 	}
 );

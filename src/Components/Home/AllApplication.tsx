@@ -1,15 +1,42 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import ApplicationIcon from "../../assets/Home/ApplicationIcon.png";
 import { FaArrowRight } from "react-icons/fa";
 import { HiLightningBolt } from "react-icons/hi";
 import EmptyApplication from "../../assets/Home/UserDashboard.png";
+import { getAllapplicationThunk } from "../../features/applications/reducers/thunk";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch } from "../../store/store";
+import { selectAllapplication } from "../../features/applications/reducers/selector";
+import dayjs from "dayjs";
+import { Link, useNavigate } from "react-router-dom";
 
 const AllApplication = () => {
-  const [data, setData] = useState([1]);
+  const dispatch = useDispatch<AppDispatch>();
+  const alljobs = useSelector(selectAllapplication) || [];
+  const navigate = useNavigate();
+
+  const fetchAllapplication = useCallback(async () => {
+    dispatch(getAllapplicationThunk());
+  }, [dispatch]);
+
+  const handleViewDetails = (jobId: any, status: any) => {
+    navigate(`/applications/${jobId}`, {
+      state: {
+        appliedStatus: status,
+      },
+    });
+  };
+
+  useEffect(() => {
+    fetchAllapplication();
+  }, [fetchAllapplication]);
+
+  console.log(alljobs);
+
   return (
     <div>
       <div className="my-10">
-        {data.length == 0 ? (
+        {alljobs?.length == 0 ? (
           <div className="h-[280px] sm:h-80 lg:h-[350px] shadow-[0px_0px_15px_0px_#00000026] rounded-2xl flex flex-col justify-center items-center gap-3 sm:gap-4 lg:gap-5 px-4 sm:px-6">
             <img
               src={EmptyApplication}
@@ -24,7 +51,7 @@ const AllApplication = () => {
             </p>
           </div>
         ) : (
-          data.map((value, index) => {
+          alljobs?.map((value: any, index) => {
             return (
               <div
                 key={index}
@@ -37,22 +64,30 @@ const AllApplication = () => {
 
                   <section className="flex flex-col gap-2">
                     <h1 className="text-lg sm:text-2xl font-medium">
-                      Ui/Ux Designer
+                      {value?.job?.title}
                     </h1>
 
                     <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-[#45556C] text-xs sm:text-sm">
-                      <span>Design</span>
+                      <span>{value?.job?.department}</span>
                       <span className="w-1 h-1 bg-[#1F2937] rounded-full"></span>
 
-                      <span>Remote</span>
+                      <span>{value?.job?.workingMode}</span>
                       <span className="w-1 h-1 bg-[#1F2937] rounded-full"></span>
 
-                      <span className="text-[#1F2937]">Applied 21/11/2025</span>
+                      <span className="text-[#1F2937]">
+                        Applied -{" "}
+                        {dayjs(value?.createdAt).format("DD MMM YYYY")}
+                      </span>
                     </div>
                   </section>
                 </div>
 
-                <button className="bg-[#FC8019] text-white flex items-center gap-2 sm:gap-3 p-2 px-3 sm:px-4 rounded-lg cursor-pointer text-sm sm:text-base w-full sm:w-auto justify-center sm:justify-normal whitespace-nowrap">
+                <button
+                  className="bg-[#FC8019] text-white flex items-center gap-2 sm:gap-3 p-2 px-3 sm:px-4 rounded-lg cursor-pointer text-sm sm:text-base w-full sm:w-auto justify-center sm:justify-normal whitespace-nowrap"
+                  onClick={() =>
+                    handleViewDetails(value?.job?._id, value?.status)
+                  }
+                >
                   View Details <FaArrowRight />
                 </button>
               </div>
@@ -71,9 +106,12 @@ const AllApplication = () => {
           </p>
         </section>
 
-        <button className="bg-[#FC8019] text-white flex items-center gap-2 sm:gap-3 p-2 px-3 sm:px-4 rounded-lg cursor-pointer text-sm sm:text-base w-full sm:w-auto justify-center sm:justify-normal">
+        <Link
+          to={"/"}
+          className="bg-[#FC8019] text-white flex items-center gap-2 sm:gap-3 p-2 px-3 sm:px-4 rounded-lg cursor-pointer text-sm sm:text-base w-full sm:w-auto justify-center sm:justify-normal"
+        >
           <HiLightningBolt /> Browse Jobs
-        </button>
+        </Link>
       </div>
     </div>
   );

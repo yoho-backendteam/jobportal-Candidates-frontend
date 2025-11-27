@@ -10,7 +10,7 @@ import Posted from "../../assets/Jobs/posted.png";
 import { FaRupeeSign } from "react-icons/fa";
 import { useCallback, useEffect } from "react";
 import { getSelectedjobThunk } from "../../features/jobs/reducers/thunk";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch } from "../../store/store";
 import { selectedjob } from "../../features/jobs/reducers/selector";
@@ -21,7 +21,12 @@ const Jobcard = () => {
     const dispatch = useDispatch<AppDispatch>();
     const navigate =useNavigate()
   const selectjob:any = useSelector(selectedjob) || [];
+  const location = useLocation();
+  const { appliedStatus } = location.state || {};
 
+  console.log(appliedStatus); // You can use it here
+
+console.log(jobname);
 
     const fetchselectedjob = useCallback(async () => {
       dispatch(getSelectedjobThunk(jobname));
@@ -184,7 +189,12 @@ const Jobcard = () => {
             <p className="text-[24px] font-bold flex gap-1 items-center"><span><FaRupeeSign /></span>{selectjob?.salaryRange}</p>
             <p className="text-[14px] text-[#45556C]">Per Annum</p>
             {/* <div className="mt-4 "> */}
-              <button className="p-3 mt-4 flex items-center justify-center rounded-lg bg-[#FC8019] text-[#ffffff] w-full cursor-pointer"> Apply for this Position</button>
+
+            {
+              appliedStatus==undefined?
+              <button className="p-3 mt-4 flex items-center justify-center rounded-lg bg-[#FC8019] text-[#ffffff] w-full cursor-pointer"> Apply for this Position</button>:
+              <button className="p-3 mt-4 flex items-center justify-center rounded-lg bg-[#278540] text-[#ffffff] w-full cursor-pointer"> Applied for this Position</button>
+            }
             {/* </div> */}
 
             <hr className="my-3 sm:my-4 text-[#62748E]" />
@@ -197,13 +207,13 @@ const Jobcard = () => {
             </div>
             <div className="mt-4">
               <p className="text-[14px] text-[#62748E]">Application Deadline:28/02/2025</p>
-              <p className="text-[14px] text-[#62748E]">{selectjob?.applicantsCount} people have applied</p>
+              <p className="text-[14px] text-[#62748E]">{selectjob?.applicantsCount} people have applied for this job</p>
             </div>
           </div>
 
           <div className="border-2 my-6 p-4 border-[#E2E8F0] rounded-2xl">
             <h1 className="text-[#0F172B] text-2xl mb-5">
-              About TechCorp India
+              About TalentHub India
             </h1>
 
             <p className="text-[#45556C] text-[15px]">

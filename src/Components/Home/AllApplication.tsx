@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch } from "../../store/store";
 import dayjs from "dayjs";
 import { Link, useNavigate } from "react-router-dom";
-import { selectAllapplication } from "../../features/applications/reducers/selector";
+import { selectAllapplication } from "../../features/applications/reducers/selectors";
 
 const AllApplication = () => {
   const dispatch = useDispatch<AppDispatch>();

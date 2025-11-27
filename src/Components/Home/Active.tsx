@@ -8,26 +8,21 @@ import ApplicationIcon from "../../assets/Home/ApplicationIcon.png";
 import dayjs from "dayjs";
 import { selectAllapplication } from "../../features/applications/reducers/selector";
 
-interface Application {
-  _id: string;
-  job: {
-    title: string;
-    department: string;
-    workingMode: string;
-  };
-  createdAt: string;
-}
 
 const Active = () => {
 
-  const [open, setopen] = useState(false);
+
+  const [open, setopen] = useState(false)
+    ;
   const dispatch = useDispatch();
 
-  const alljobs: Application[] = useSelector(selectAllapplication) || [];
+  const alljobs = useSelector(selectAllapplication) || [];
   const ids = alljobs.map(job => job._id);
+  console.log(ids);
 
 
   const timeline = useSelector(selectTimeline) || [];
+  console.log(timeline, "timelinnnnnnnnnn");
 
   useEffect(() => {
     dispatch(getTimelineThunks(ids as any) as any);
@@ -81,31 +76,27 @@ const Active = () => {
       })}</div>
       {open && (
         <div className="space-y-5">
-          {timeline?.map((t: any, idx: any) => (
-            <div key={idx}>
-              {t?.timeline?.map((item: any, stageIdx: any) => {
-                const status = item.inProgress
-                  ? "current"
-                  : item.completed
-                    ? "completed"
-                    : "pending";
+          {timeline?.data?.timeline?.map((item: any, idx: any) => {
+            const status =
+              item.inProgress
+                ? "current"
+                : item.completed
+                  ? "completed"
+                  : "pending";
 
-                return (
-                  <StageCard
-                    key={stageIdx}
-                    title={item.title}
-                    description={item.description}
-                    status={status}
-                    time={item.time || ""}
-                    date={item.date || ""}
-                  />
-                );
-              })}
-            </div>
-          ))}
+            return (
+              <StageCard
+                key={idx}
+                title={item.title}
+                description={item.description}
+                status={status}
+                time={item.time || ""}
+                date={item.date || ""}
+              />
+            );
+          })}
         </div>
       )}
-
 
     </div>
   );

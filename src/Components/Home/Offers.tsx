@@ -16,6 +16,7 @@ import { selectAllapplication } from "../../features/applications/reducers/selec
 import { useDispatch, useSelector } from "react-redux";
 import { getOfferThunks } from "../../features/Offer/reducers/Thunks";
 import { IoMdClose } from "react-icons/io";
+import { PiSmileySadFill } from "react-icons/pi";
 
 
 const Offers = () => {
@@ -213,7 +214,12 @@ const Offers = () => {
           </div>
 
         </>
-      ) : null}
+      ) : <><div>
+        <div className="flex flex-col items-center justify-center h-45 mt-3 mx-100  rounded-lg border-gray-200 border bg-[#F8F9FA]">
+          <p className="text-gray-400"><PiSmileySadFill size={30} /></p>
+          <p className="text-[20px]">Dear user there is no offer letter pdf here</p>
+        </div>
+        </div></>}
 
 
 

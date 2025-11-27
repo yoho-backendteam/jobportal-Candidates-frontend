@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import ApplicationIcon from "../../assets/Home/ApplicationIcon.png";
 import { FaArrowRight } from "react-icons/fa";
 import { HiLightningBolt } from "react-icons/hi";
@@ -30,8 +30,6 @@ const AllApplication = () => {
   useEffect(() => {
     fetchAllapplication();
   }, [fetchAllapplication]);
-
-  console.log(alljobs);
 
   return (
     <div>

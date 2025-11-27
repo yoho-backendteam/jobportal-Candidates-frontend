@@ -18,6 +18,7 @@ import { getAlljobsThunk } from "../../features/jobs/reducers/thunk";
 import type { AppDispatch } from "../../store/store";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 const Joblist = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -25,6 +26,7 @@ const Joblist = () => {
 
   const [searchTitle, setSearchTitle] = useState("");
   const [searchLocation, setSearchLocation] = useState("");
+  const { isAuthenticated } = useAuth();
 
   const fetchAlljobs = useCallback(async () => {
     dispatch(getAlljobsThunk());
@@ -177,7 +179,15 @@ const Joblist = () => {
                 <img src={Icon12} alt="" className="w-4 h-4 sm:text-sm" />
               </div>
 
-              <div className="rounded-lg px-5 py-2 bg-[#FC8019] text-white sm:text-sm sm:flex-row flex-row text-sm flex items-center gap-2 cursor-pointer">
+              <div
+                className="rounded-lg px-5 py-2 bg-[#FC8019] text-white sm:text-sm sm:flex-row flex-row text-sm flex items-center gap-2 cursor-pointer"
+                onClick={() => {
+                  if (!isAuthenticated) {
+                    navigate("/signin");
+                    return;
+                  }
+                }}
+              >
                 <img src={Icon13} alt="" className="w-4 h-4 sm:text-sm " />
                 <span className="text-md sm:text-sm">Quick Apply</span>
               </div>
@@ -187,28 +197,27 @@ const Joblist = () => {
       </div>
 
       <div className="flex flex-col sm:flex-row gap-5 mt-5">
-  {/* Active Jobs Card */}
-  <div className="w-full sm:w-[33%] bg-linear-to-r from-[#EFF6FF] to-[#DBEAFE80] h-40 sm:h-50 rounded-lg shadow-[0_0_20px_0_#0000001A] flex flex-col items-center justify-center gap-2 p-4">
-    <img src={Container3} alt="" className="w-10 sm:w-fit" />
-    <h2 className="text-center font-bold text-lg sm:text-4xl">5+</h2>
-    <p className="text-center text-xs sm:text-lg">Active jobs</p>
-  </div>
+        {/* Active Jobs Card */}
+        <div className="w-full sm:w-[33%] bg-linear-to-r from-[#EFF6FF] to-[#DBEAFE80] h-40 sm:h-50 rounded-lg shadow-[0_0_20px_0_#0000001A] flex flex-col items-center justify-center gap-2 p-4">
+          <img src={Container3} alt="" className="w-10 sm:w-fit" />
+          <h2 className="text-center font-bold text-lg sm:text-4xl">5+</h2>
+          <p className="text-center text-xs sm:text-lg">Active jobs</p>
+        </div>
 
-  {/* Departments Card */}
-  <div className="w-full sm:w-[33%] bg-linear-to-r from-[#F0FDFA] to-[#CBFBF180] h-40 sm:h-50 rounded-lg shadow-[0_0_20px_0_#0000001A] flex flex-col items-center justify-center gap-2 p-4">
-    <img src={Container4} alt="" className="w-10 sm:w-fit" />
-    <h2 className="text-center font-bold text-lg sm:text-4xl">3</h2>
-    <p className="text-center text-xs sm:text-lg">Departments</p>
-  </div>
+        {/* Departments Card */}
+        <div className="w-full sm:w-[33%] bg-linear-to-r from-[#F0FDFA] to-[#CBFBF180] h-40 sm:h-50 rounded-lg shadow-[0_0_20px_0_#0000001A] flex flex-col items-center justify-center gap-2 p-4">
+          <img src={Container4} alt="" className="w-10 sm:w-fit" />
+          <h2 className="text-center font-bold text-lg sm:text-4xl">3</h2>
+          <p className="text-center text-xs sm:text-lg">Departments</p>
+        </div>
 
-  {/* Candidates Card */}
-  <div className="w-full sm:w-[33%] bg-linear-to-r from-[#FAF5FF] to-[#F3E8FF80] h-40 sm:h-50 rounded-lg shadow-[0_0_20px_0_#0000001A] flex flex-col items-center justify-center gap-2 p-4">
-    <img src={Container5} alt="" className="w-10 sm:w-fit" />
-    <h2 className="text-center font-bold text-lg sm:text-4xl">10,000+</h2>
-    <p className="text-center text-xs sm:text-lg">Candidates</p>
-  </div>
-</div>
-
+        {/* Candidates Card */}
+        <div className="w-full sm:w-[33%] bg-linear-to-r from-[#FAF5FF] to-[#F3E8FF80] h-40 sm:h-50 rounded-lg shadow-[0_0_20px_0_#0000001A] flex flex-col items-center justify-center gap-2 p-4">
+          <img src={Container5} alt="" className="w-10 sm:w-fit" />
+          <h2 className="text-center font-bold text-lg sm:text-4xl">10,000+</h2>
+          <p className="text-center text-xs sm:text-lg">Candidates</p>
+        </div>
+      </div>
     </div>
   );
 };

@@ -20,7 +20,8 @@ export const appRoutes = (
     <Route element={<MainLayout />}>
       <Route path="/" element={<Jobs />} />
       <Route path="/:jobname" element={<Jobcard />} />
-      <Route path="*" element={<Jobs />} />
+      <Route path="/applications/:jobname" element={<Jobcard />} />
+      <Route path="*" element={<Jobs/>} />
     </Route>
     <Route path="/signin" element={<SignIn />} />
     <Route path="/signup" element={<SignUp />} />

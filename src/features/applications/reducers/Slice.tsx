@@ -1,17 +1,20 @@
+import { createSlice } from '@reduxjs/toolkit';
 
-import { createSlice } from "@reduxjs/toolkit";
-
-const applicationSlice = createSlice({
-  name: "application",
-  initialState: {
-    application: null,
-  },
-  reducers: {
-    setApplication: (state, action) => {
-      state.application = action.payload;
-    },
-  },
+const ApplicationSlice = createSlice({
+	name: 'ApplicationSlice',
+	initialState: {
+		applications: [],
+    selectedapplication:[]
+	},
+	reducers: {
+		getAllapplications: (state, action) => {
+			state.applications = action.payload;
+		},
+    getselectedapplication:(state,action)=>{
+      state.selectedapplication=action.payload
+    }
+	},
 });
 
-export const { setApplication } = applicationSlice.actions;
-export default applicationSlice.reducer;
+export const { getAllapplications , getselectedapplication} = ApplicationSlice.actions;
+export default ApplicationSlice.reducer;

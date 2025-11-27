@@ -15,6 +15,8 @@ import type { AppDispatch } from "../../store/store";
 import { selectedjob } from "../../features/jobs/reducers/selector";
 import dayjs from "dayjs";
 import { useAuth } from "../../context/AuthContext";
+import { applyJobThunk } from "../../features/applications/reducers/thunk";
+import { toast } from "react-toastify";
 
 const Jobcard = () => {
   const { jobname } = useParams();
@@ -23,6 +25,7 @@ const Jobcard = () => {
   const selectjob: any = useSelector(selectedjob) || [];
   const location = useLocation();
   const { appliedStatus } = location.state || {};
+  const { isAuthenticated } = useAuth();
 
   console.log(appliedStatus);
 
@@ -75,7 +78,7 @@ const Jobcard = () => {
                         src={Location}
                         alt=""
                         className="w-4 h-4 sm:w-5 sm:h-5"
-                      />{" "}
+                      />
                       {selectjob?.location}
                     </p>
                     <p className="text-[#45556C] flex items-center gap-2 sm:gap-3 text-sm sm:text-base">
@@ -83,7 +86,7 @@ const Jobcard = () => {
                         src={Workmode}
                         alt=""
                         className="w-4 h-4 sm:w-5 sm:h-5"
-                      />{" "}
+                      />
                       {selectjob?.employmentType} • {selectjob?.workingMode}
                     </p>
                   </div>
@@ -94,7 +97,7 @@ const Jobcard = () => {
                         src={Experience}
                         alt=""
                         className="w-4 h-4 sm:w-5 sm:h-5"
-                      />{" "}
+                      />
                       {selectjob?.experienceRequired}
                     </p>
                     <p className="text-[#45556C] flex items-center gap-2 sm:gap-3 text-sm sm:text-base">
@@ -102,7 +105,7 @@ const Jobcard = () => {
                         src={Package}
                         alt=""
                         className="w-4 h-4 sm:w-5 sm:h-5"
-                      />{" "}
+                      />
                       ₹ {selectjob?.salaryRange}
                     </p>
                   </div>
@@ -157,7 +160,7 @@ const Jobcard = () => {
                     key={index}
                     className="flex gap-4 items-center my-2 text-[#45556C] text-[15px]"
                   >
-                    <img src={Chkpoint} alt="chkimg" /> <span>{keypoints}</span>{" "}
+                    <img src={Chkpoint} alt="chkimg" /> <span>{keypoints}</span>
                   </p>
                 );
               }
@@ -175,8 +178,8 @@ const Jobcard = () => {
                     key={index}
                     className="flex gap-4 items-center my-2 text-[#45556C] text-[15px]"
                   >
-                    <img src={Chkpoint} alt="chkimg" />{" "}
-                    <span>{qualification}</span>{" "}
+                    <img src={Chkpoint} alt="chkimg" />
+                    <span>{qualification}</span>
                   </p>
                 );
               }
@@ -187,10 +190,10 @@ const Jobcard = () => {
             <h1 className="text-[#0F172B] text-2xl mb-5">Nice to Have</h1>
             {Array(5).fill(
               <p className="flex gap-4 items-center my-2 text-[#45556C] text-[15px]">
-                <img src={Chkpoint} alt="chkimg" />{" "}
+                <img src={Chkpoint} alt="chkimg" />
                 <span>
                   Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                </span>{" "}
+                </span>
               </p>
             )}
           </div>
@@ -210,16 +213,29 @@ const Jobcard = () => {
             {/* <div className="mt-4 "> */}
 
             {appliedStatus == undefined ? (
-              <button className="p-3 mt-4 flex items-center justify-center rounded-lg bg-[#FC8019] text-[#ffffff] w-full cursor-pointer">
-                {" "}
+              <button
+                onClick={async () => {
+                  if (!isAuthenticated) {
+                    navigate("/signin", { state: { from: location.pathname } });
+                    return;
+                  }
+                  const result = await dispatch(applyJobThunk(selectjob?._id));
+                  if (result?.success) {
+                    navigate("/success_page");
+                  } else {
+                    toast.error("Aleady Applied");
+                  }
+                }}
+                className="p-3 mt-4 flex items-center justify-center rounded-lg bg-[#FC8019] text-[#ffffff] w-full cursor-pointer"
+              >
                 Apply for this Position
               </button>
             ) : (
               <button className="p-3 mt-4 flex items-center justify-center rounded-lg bg-[#278540] text-[#ffffff] w-full cursor-pointer">
-                {" "}
                 Applied for this Position
               </button>
             )}
+
             {/* </div> */}
 
             <hr className="my-3 sm:my-4 text-[#62748E]" />

@@ -1,12 +1,23 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Logout from "../../assets/Logout.png";
 import { useAuth } from "../../context/AuthContext";
+import { GetLocalStorage } from "../../utils/helpers";
 
 const Navbar = () => {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const { isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
+  const [userName, setUserName] = useState<string | null>(null);
+  useEffect(() => {
+    if (isAuthenticated) {
+      const user = GetLocalStorage("candidateDetails");
+      console.log("Users", user);
+      if (user && typeof user === "object") {
+        setUserName(user.fullName || null);
+      }
+    }
+  }, [isAuthenticated]);
 
   const handleConfirmLogout = () => {
     logout();
@@ -42,11 +53,11 @@ const Navbar = () => {
               <>
                 <div className="flex items-center gap-4 border-2 px-4 py-1 border-[#E9E9EB] rounded-lg bg-[#F9F9F9]">
                   <section className="h-[35px] w-[35px] bg-orange-400 rounded-full flex justify-center items-center text-lg text-white">
-                    M
+                    {userName ? userName.charAt(0).toUpperCase() : "U"}
                   </section>
 
                   <section>
-                    <h1 className="text-[#282C3F]">Mukesh</h1>
+                    <h1 className="text-[#282C3F]">{userName || "User"}</h1>
                     <p className="font-light text-[#686B78]">User</p>
                   </section>
                 </div>

@@ -31,8 +31,6 @@ const AllApplication = () => {
     fetchAllapplication();
   }, [fetchAllapplication]);
 
-  console.log(alljobs);
-
   return (
     <div>
       <div className="my-10">

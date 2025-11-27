@@ -25,3 +25,8 @@ export const RemoveLocalStorage = (key: string) => {
 export const ClearLocalStorage = () => {
 	secureStorage.clear();
 };
+
+export const CapsText = (val: any) => {
+	if (!val || typeof val !== 'string') return '';
+	return `${val.charAt(0).toUpperCase()}${val.slice(1)}`;
+};

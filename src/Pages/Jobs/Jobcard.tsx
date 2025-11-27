@@ -17,16 +17,16 @@ import dayjs from "dayjs";
 import { useAuth } from "../../context/AuthContext";
 
 const Jobcard = () => {
-  const  {jobname}  = useParams();
-    const dispatch = useDispatch<AppDispatch>();
-    const navigate =useNavigate()
-  const selectjob:any = useSelector(selectedjob) || [];
+  const { jobname } = useParams();
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+  const selectjob: any = useSelector(selectedjob) || [];
   const location = useLocation();
   const { appliedStatus } = location.state || {};
 
-  console.log(appliedStatus); // You can use it here
+  console.log(appliedStatus);
 
-console.log(jobname);
+  console.log(jobname);
 
   const fetchselectedjob = useCallback(async () => {
     dispatch(getSelectedjobThunk(jobname));
@@ -209,11 +209,17 @@ console.log(jobname);
             <p className="text-[14px] text-[#45556C]">Per Annum</p>
             {/* <div className="mt-4 "> */}
 
-            {
-              appliedStatus==undefined?
-              <button className="p-3 mt-4 flex items-center justify-center rounded-lg bg-[#FC8019] text-[#ffffff] w-full cursor-pointer"> Apply for this Position</button>:
-              <button className="p-3 mt-4 flex items-center justify-center rounded-lg bg-[#278540] text-[#ffffff] w-full cursor-pointer"> Applied for this Position</button>
-            }
+            {appliedStatus == undefined ? (
+              <button className="p-3 mt-4 flex items-center justify-center rounded-lg bg-[#FC8019] text-[#ffffff] w-full cursor-pointer">
+                {" "}
+                Apply for this Position
+              </button>
+            ) : (
+              <button className="p-3 mt-4 flex items-center justify-center rounded-lg bg-[#278540] text-[#ffffff] w-full cursor-pointer">
+                {" "}
+                Applied for this Position
+              </button>
+            )}
             {/* </div> */}
 
             <hr className="my-3 sm:my-4 text-[#62748E]" />
@@ -245,8 +251,12 @@ console.log(jobname);
               </p>
             </div>
             <div className="mt-4">
-              <p className="text-[14px] text-[#62748E]">Application Deadline:28/02/2025</p>
-              <p className="text-[14px] text-[#62748E]">{selectjob?.applicantsCount} people have applied for this job</p>
+              <p className="text-[14px] text-[#62748E]">
+                Application Deadline:28/02/2025
+              </p>
+              <p className="text-[14px] text-[#62748E]">
+                {selectjob?.applicantsCount} people have applied for this job
+              </p>
             </div>
           </div>
 

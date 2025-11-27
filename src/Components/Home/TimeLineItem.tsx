@@ -47,8 +47,12 @@ const StageCard: React.FC<StageData> = ({
     return InactiveIcon;
   };
 
+
+  
+  
+
   return (
-    <div className="relative flex gap-4">
+    <div className="relative flex gap-4 ">
       {/* Timeline Dot + Line */}
       <div className="flex flex-col items-center">
         <img src={getIcon()} className="w-5 h-5" />

@@ -3,7 +3,6 @@ import ApplicationIcon from "../../assets/Home/ApplicationIcon.png";
 import { FaArrowRight } from "react-icons/fa";
 import { HiLightningBolt } from "react-icons/hi";
 import EmptyApplication from "../../assets/Home/UserDashboard.png";
-import { getAllapplicationThunk } from "../../features/applications/reducers/thunk";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch } from "../../store/store";
 import dayjs from "dayjs";
@@ -11,13 +10,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { selectAllapplication } from "../../features/applications/reducers/selectors";
 
 const AllApplication = () => {
-  const dispatch = useDispatch<AppDispatch>();
   const alljobs = useSelector(selectAllapplication) || [];
   const navigate = useNavigate();
 
-  const fetchAllapplication = useCallback(async () => {
-    dispatch(getAllapplicationThunk());
-  }, [dispatch]);
+  
 
   const handleViewDetails = (jobId: any, status: any) => {
     navigate(`/applications/${jobId}`, {
@@ -27,9 +23,7 @@ const AllApplication = () => {
     });
   };
 
-  useEffect(() => {
-    fetchAllapplication();
-  }, [fetchAllapplication]);
+  
 
   return (
     <div>

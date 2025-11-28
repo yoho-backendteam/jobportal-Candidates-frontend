@@ -12,12 +12,14 @@ const Navbar = () => {
   const { isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
   const [userName, setUserName] = useState<string | null>(null);
+  const [userRole, setUserRole] = useState<string | null>(null);
 
   useEffect(() => {
     if (isAuthenticated) {
       const user = GetLocalStorage("candidateDetails");
       if (user && typeof user === "object") {
         setUserName(user.fullName || null);
+        setUserRole(user.role || null)
       }
     }
   }, [isAuthenticated]);
@@ -77,7 +79,7 @@ const Navbar = () => {
 
                 <div>
                   <h1 className="text-[#282C3F] font-medium">{userName || "User"}</h1>
-                  <p className="text-sm text-gray-500">User</p>
+                  <p className="text-sm text-gray-500">{userRole || "candidate"}</p>
                 </div>
               </div>
 
@@ -131,7 +133,7 @@ const Navbar = () => {
                 </div> */}
                 <div>
                   <h1 className="font-semibold text-sm">{userName}</h1>
-                  <p className="text-gray-500 text-xs">User</p>
+                  <p className="text-gray-500 text-xs">{userRole}</p>
                 </div>
               </div>
 

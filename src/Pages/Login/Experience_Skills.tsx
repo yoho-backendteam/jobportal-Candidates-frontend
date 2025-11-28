@@ -177,8 +177,8 @@ const Experience_Skills = () => {
               name="total_experience"
               value={formData.total_experience}
               onChange={handleChange}
-              type="text"
-              placeholder="E.g. 3 years, Fresher"
+              type="number"
+              placeholder="0"
               className={`w-full py-2 px-3 bg-[#F3F3F5] rounded-lg placeholder:text-gray-400 focus:outline-none ${
                 errors.total_experience ? "border border-red-500" : ""
               }`}

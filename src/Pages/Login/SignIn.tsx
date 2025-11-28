@@ -29,8 +29,9 @@ const SignIn = () => {
         login(result);
         toast.success("Login successful!");
       }
-    } catch (err) {
+    } catch (err:any) {
       console.error("Login Error:", err);
+      toast.error(err)
     } finally {
       setLoading(false);
     }

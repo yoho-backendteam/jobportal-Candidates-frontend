@@ -18,6 +18,9 @@ import { getAlljobsThunk } from "../../features/jobs/reducers/thunk";
 import type { AppDispatch } from "../../store/store";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import { toast } from "react-toastify";
+import { applyJobThunk } from "../../features/applications/reducers/thunk";
 
 const Joblist = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -25,6 +28,7 @@ const Joblist = () => {
 
   const [searchTitle, setSearchTitle] = useState("");
   const [searchLocation, setSearchLocation] = useState("");
+  const { isAuthenticated } = useAuth();
 
   const fetchAlljobs = useCallback(async () => {
     dispatch(getAlljobsThunk());
@@ -40,7 +44,6 @@ const Joblist = () => {
     fetchAlljobs();
   }, [fetchAlljobs]);
 
-  // Filtered jobs based on search inputs
   const filteredJobs = alljobs.filter((job: any) => {
     const matchesTitle =
       job.title.toLowerCase().includes(searchTitle.toLowerCase()) ||
@@ -49,8 +52,9 @@ const Joblist = () => {
     const matchesLocation = job.location
       .toLowerCase()
       .includes(searchLocation.toLowerCase());
+    const isActive = job.isActive === true;
 
-    return matchesTitle && matchesLocation;
+    return matchesTitle && matchesLocation && isActive;
   });
 
   return (
@@ -177,7 +181,28 @@ const Joblist = () => {
                 <img src={Icon12} alt="" className="w-4 h-4 sm:text-sm" />
               </div>
 
-              <div className="rounded-lg px-5 py-2 bg-[#FC8019] text-white sm:text-sm sm:flex-row flex-row text-sm flex items-center gap-2 cursor-pointer">
+              <div
+                className="rounded-lg px-5 py-2 bg-[#FC8019] text-white sm:text-sm sm:flex-row flex-row text-sm flex items-center gap-2 cursor-pointer"
+                onClick={async () => {
+                  if (!isAuthenticated) {
+                    navigate("/signin");
+                    return;
+                  }
+                  try {
+                    const result = await dispatch(applyJobThunk(value._id));
+                    if (result?.success) {
+                      toast.success("Application submitted successfully!");
+                    } else {
+                      toast.error("You have already applied for this job");
+                      {
+                        ("}");
+                      }
+                    }
+                  } catch (error) {
+                    toast.error("Failed to apply. Please try again.");
+                  }
+                }}
+              >
                 <img src={Icon13} alt="" className="w-4 h-4 sm:text-sm " />
                 <span className="text-md sm:text-sm">Quick Apply</span>
               </div>

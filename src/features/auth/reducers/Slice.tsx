@@ -13,6 +13,7 @@ const authSlice = createSlice({
     loading: false,
     error: null,
     resetSuccess: false,
+    signupSuccess: false,
   },
 
   reducers: {
@@ -39,6 +40,9 @@ const authSlice = createSlice({
     setResetSuccess(state, action) {
       state.resetSuccess = action.payload;
     },
+    setSignupSuccess(state, action) {
+      state.signupSuccess = action.payload;
+    },
   },
 });
 
@@ -50,6 +54,7 @@ export const {
   setOtpVerified,
   setOtpError,
   setResetSuccess,
+  setSignupSuccess
 } = authSlice.actions;
 
 export default authSlice.reducer;

@@ -6,9 +6,9 @@ import EmptyApplication from "../../assets/Home/UserDashboard.png";
 import { getAllapplicationThunk } from "../../features/applications/reducers/thunk";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch } from "../../store/store";
-import { selectAllapplication } from "../../features/applications/reducers/selector";
 import dayjs from "dayjs";
 import { Link, useNavigate } from "react-router-dom";
+import { selectAllapplication } from "../../features/applications/reducers/selectors";
 
 const AllApplication = () => {
   const dispatch = useDispatch<AppDispatch>();

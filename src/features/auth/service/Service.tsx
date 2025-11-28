@@ -13,6 +13,35 @@ export const loginService = async (data: {
   }
 };
 
+export const signupService = async (data: {
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  password: string;
+  role: string;
+  dateOfBirth: string;
+  gender: string;
+  address: string;
+  city: string;
+  state: string;
+  pincode: string;
+  highestEducation: string;
+  institution: string;
+  graduationYear: number;
+  percentage: number;
+  specialization: string;
+  totalExperience: number;
+  keySkills: string[];
+}) => {
+  try {
+    const response = await Client.common.register(data);
+    console.log("Register", response);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const forgotpasswordService = async (data: {
   email?: string;
   phone?: string;
@@ -61,7 +90,7 @@ export const resetPasswordService = async (data: {
 }) => {
   try {
     const response = await Client.common.reset_password(data);
-    console.log("first",response)
+    console.log("first", response);
     return response;
   } catch (error) {
     throw error;

@@ -11,7 +11,7 @@ import { useState } from 'react';
 import Success from '../../assets/Home/Confirmation_icon.png';
 import decline from '../../assets/Home/Confirmation_decline_icon.png';
 import doubletick from '../../assets/Home/Double_tick.png';
-import { selectAllapplication } from '../../features/applications/reducers/selector';
+import { selectAllapplication } from '../../features/applications/reducers/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { getOfferThunks } from '../../features/Offer/reducers/Thunks';
 import { IoMdClose } from 'react-icons/io';

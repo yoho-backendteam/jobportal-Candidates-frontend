@@ -3,6 +3,7 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -99,6 +100,7 @@ const SignUp = () => {
       localStorage.setItem("signupData", JSON.stringify(signupData));
       localStorage.setItem("signupEmail", formData.email);
       // navigate("/emailotpverfication");
+      toast.success("User Registered Successfully")
       navigate("/Personal_Details");
     } catch (error: any) {
       console.error("Error:", error);

@@ -22,7 +22,6 @@ export const loginThunk = (data: { email: string; password: string }) => {
   return async (dispatch: AppDispatch) => {
     try {
       const response = await loginService(data);
-      console.log("LOgin thunk", response);
       dispatch(
         signin({
           user: response.data.user,
@@ -114,7 +113,7 @@ export const resetPasswordThunk = (data: {
       dispatch(setOtpLoading(true));
 
       const response = await resetPasswordService(data);
-      console.log("thunk", response);
+      console.error("thunk", response);
 
       dispatch(setOtpError(null));
       dispatch(setOtpLoading(false));

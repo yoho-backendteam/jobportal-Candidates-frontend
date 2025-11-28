@@ -8,10 +8,9 @@ export const getOfferThunks = (id: string, data: any) =>
     try {
         const response = await getOfferServices(id, data); 
         dispatch(getOffer(response)); 
-        console.log("Get Offer Thunk Response", response);
         return response;
     } catch (error) {
-        console.log("Error in getOfferThunks", error);
+        console.error("Error in getOfferThunks", error);
         return error;
     }
 };

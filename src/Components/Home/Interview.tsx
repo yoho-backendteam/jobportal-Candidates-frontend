@@ -15,12 +15,9 @@ const Interview = () => {
 	const [viewInterview, setviewInterview] = useState<any>('');
 	const alljobs = useSelector(selectAllapplication) || [];
 
-	console.log(viewInterview, 'fghjkl');
-
 	const handleview = (value: any) => {
 		setopen(true);
 		setviewInterview(value);
-		console.log(value);
 	};
 
 	const statusStyles: any = {

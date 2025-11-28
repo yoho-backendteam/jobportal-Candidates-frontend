@@ -32,7 +32,7 @@ const Change_Password = () => {
 
       navigate("/otp-verfication");
     } catch (error) {
-      console.log("OTP Error:", error);
+      console.error("OTP Error:", error);
       toast.error("Failed to send OTP!");
     }
   };

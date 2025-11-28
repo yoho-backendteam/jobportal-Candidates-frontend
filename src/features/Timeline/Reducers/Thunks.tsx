@@ -10,10 +10,9 @@ export const getTimelineThunks = (id: string) =>
     try {
         const response = await getTimelineServices(id); 
         dispatch(getTimelineslice(response)); 
-        console.log("Get Timeline Thunk Response", response);
         return response;
     } catch (error) {
-        console.log("Error in getTimelineThunks", error);
+        console.error("Error in getTimelineThunks", error);
         return error;
     }
 };

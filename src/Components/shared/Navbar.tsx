@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import Logout from "../../assets/Logout.png";
 import { useAuth } from "../../context/AuthContext";
 import { GetLocalStorage } from "../../utils/helpers";
+import { FaArrowRightFromBracket } from "react-icons/fa6";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
@@ -21,6 +23,7 @@ const Navbar = () => {
   }, [isAuthenticated]);
 
   const handleConfirmLogout = () => {
+    toast.success("Successfully Logout")
     logout();
     setShowLogoutModal(false);
     navigate("/");
@@ -93,14 +96,14 @@ const Navbar = () => {
       {/* Mobile Dropdown Menu */}
       {menuOpen && (
         <div className="md:hidden bg-amber-50 shadow-inner px-5 py-4 space-y-4">
-          <Link to="/" className="block text-lg" onClick={() => setMenuOpen(false)}>
+          <Link to="/" className="block text-md" onClick={() => setMenuOpen(false)}>
             Jobs
           </Link>
 
           {isAuthenticated && (
             <Link
               to="/applications"
-              className="block text-lg"
+              className="block text-md"
               onClick={() => setMenuOpen(false)}
             >
               Applications
@@ -122,13 +125,13 @@ const Navbar = () => {
             <div className="flex items-center gap-3">
               
               {/* User Card */}
-              <div className="flex items-center gap-3 border px-4 py-2 bg-white rounded-lg shadow-sm flex-1">
-                <div className="h-[35px] w-[35px] bg-orange-400 rounded-full flex justify-center items-center text-white">
+              <div className="flex items-center gap-3 border p-2 bg-white rounded-lg shadow-sm flex-1">
+                {/* <div className="h-[30px] w-[35px] bg-orange-400 rounded-full flex justify-center items-center text-white">
                   {userName ? userName.charAt(0).toUpperCase() : "U"}
-                </div>
+                </div> */}
                 <div>
-                  <h1 className="font-semibold">{userName}</h1>
-                  <p className="text-gray-500 text-sm">User</p>
+                  <h1 className="font-semibold text-sm">{userName}</h1>
+                  <p className="text-gray-500 text-xs">User</p>
                 </div>
               </div>
 
@@ -140,8 +143,8 @@ const Navbar = () => {
                 }}
                 className="flex items-center justify-center gap-2 py-2 px-4 rounded-lg bg-[#FC8019] text-white shadow-sm hover:bg-orange-600 transition"
               >
-                <img src={Logout} className="h-5 invert" />
-                Logout
+                <p><FaArrowRightFromBracket /></p>
+                <span className="text-sm">Logout</span>
               </button>
             </div>
           )}
@@ -150,7 +153,7 @@ const Navbar = () => {
 
       {/* Logout Modal */}
       {showLogoutModal && (
-        <div className="fixed inset-0 bg-black/40 flex justify-center items-center z-[9999]">
+        <div className="fixed inset-0 bg-black/40 flex justify-center items-center z-9999">
           <div className="bg-white w-80 p-6 rounded-xl shadow-xl animate-fadeIn">
             <h2 className="text-xl font-semibold mb-2">Confirm Logout</h2>
             <p className="text-gray-600 mb-5">Are you sure you want to logout?</p>

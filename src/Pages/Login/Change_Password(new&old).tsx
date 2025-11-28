@@ -52,7 +52,6 @@ const Change_Password_old = () => {
       };
 
       const actionResult = await dispatch(resetPasswordThunk(resetData));
-      console.log("Action Result:", actionResult);
 
       if (actionResult?.success) {
         toast.success("Password reset successfully!");

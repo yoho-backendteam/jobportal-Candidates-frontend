@@ -40,7 +40,7 @@ const Offers = () => {
 			setfailure(false);
 			setpage(false);
 		} catch (error) {
-			console.log('Failed to accept offer:', error);
+			console.error('Failed to accept offer:', error);
 		}
 	};
 
@@ -57,7 +57,7 @@ const Offers = () => {
 			setdeclinepage(false);
 			setsuccess(false);
 		} catch (error) {
-			console.log('Failed to accept offer:', error);
+			console.error('Failed to accept offer:', error);
 		}
 	};
 

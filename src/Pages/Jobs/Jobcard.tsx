@@ -27,10 +27,6 @@ const Jobcard = () => {
   const { appliedStatus } = location.state || {};
   const { isAuthenticated } = useAuth();
 
-  console.log(appliedStatus);
-
-  console.log(jobname);
-
   const fetchselectedjob = useCallback(async () => {
     dispatch(getSelectedjobThunk(jobname));
   }, []);
@@ -39,16 +35,17 @@ const Jobcard = () => {
     fetchselectedjob();
   }, [dispatch]);
 
-  console.log(selectjob);
 
   return (
     <div>
-      <p
-        className="flex items-center gap-3 font-medium my-4 cursor-pointer"
+     <div>
+       <p
+        className="flex items-center gap-3 w-fit border border-[#FC8019] rounded-lg p-1 font-medium my-4 cursor-pointer"
         onClick={() => navigate(-1)}
       >
-        <BiArrowBack /> Back to jobs
+        <BiArrowBack  size={20}/> 
       </p>
+     </div>
 
       <div className="flex flex-col lg:flex-row gap-5">
         {/* Main Job Card */}

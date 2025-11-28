@@ -80,13 +80,13 @@ const Joblist = () => {
         </p>
 
         {/* Search Inputs */}
-        <div className="sm:max-w-[766px] w-full h-10 sm:h-15 bg-white rounded-xl flex items-center px-2 sm:px-5 gap-2 sm:gap-4 border border-gray-300 flex-nowrap">
+        <div className="sm:max-w-[766px] w-full h-10  sm:h-15 bg-white rounded-xl flex items-center px-2 sm:px-5 gap-2 sm:gap-4 border border-gray-300 flex-nowrap">
           <input
             type="text"
             placeholder="Job Title, Keywords, or Department"
             value={searchTitle}
             onChange={(e) => setSearchTitle(e.target.value)}
-            className="flex-1 w-full placeholder:text-xs sm:placeholder:text-md outline-none text-xs sm:text-lg"
+            className="flex-1 w-full cursor-pointer placeholder:text-xs sm:placeholder:text-md outline-none text-xs sm:text-lg"
           />
 
           <div className="hidden sm:block w-0.5 h-1/2 bg-gray-300"></div>
@@ -98,7 +98,7 @@ const Joblist = () => {
               placeholder="Location"
               value={searchLocation}
               onChange={(e) => setSearchLocation(e.target.value)}
-              className="flex-1 placeholder:text-xs outline-none sm:placeholder:text-md"
+              className="flex-1 cursor-pointer placeholder:text-xs outline-none sm:placeholder:text-md"
             />
           </div>
 
@@ -117,14 +117,14 @@ const Joblist = () => {
             className="w-full border border-[#FC8019] rounded-[20px] p-5 mt-5 flex flex-col lg:flex-row justify-between gap-5"
           >
             {/* Left Section */}
-            <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-[70%]">
+            <div className="flex flex-col sm:flex-row sm:gap-5 gap-3 w-full lg:w-[70%]">
               <img
                 src={ContainerImage}
-                className="w-[70px] h-[70px] flex-shrink-0"
+                className="w-10 h-10 sm:w-[50px] sm:h-[50px] shrink-0"
                 alt=""
               />
               <div className="flex-1">
-                <h2 className="text-xl sm:text-2xl font-semibold">
+                <h2 className="text-lg sm:text-2xl font-semibold">
                   {value?.title}
                 </h2>
                 <div className="flex flex-col sm:flex-row sm:gap-4 gap-1 text-[#45556C] mt-1">
@@ -136,13 +136,13 @@ const Joblist = () => {
                 </div>
 
                 <div className="flex flex-wrap gap-3 mt-3">
-                  <div className="border border-[#FC8019] rounded-lg px-3 py-1 flex items-center gap-2 text-[#FC8019]">
+                  <div className="border border-[#FC8019] rounded-lg sm:text-[17px] text-sm px-3 py-1 flex items-center gap-2 text-[#FC8019]">
                     <img src={Icon14} alt="" className="w-4 h-4" /> Full Time
                   </div>
-                  <div className="border border-[#FC8019] rounded-lg px-3 py-1 text-[#FC8019]">
+                  <div className="border border-[#FC8019] rounded-lg sm:text-[17px] text-sm px-3 py-1 text-[#FC8019]">
                     {value?.salaryRange}
                   </div>
-                  <div className="border border-[#FC8019] rounded-lg px-3 py-1 text-[#45556C]">
+                  <div className="border border-[#FC8019] rounded-lg sm:text-[17px] text-sm px-3 py-1 text-[#45556C]">
                     Posted - {dayjs(value.updatedAt).format("DD MMM YYYY")}
                   </div>
                 </div>

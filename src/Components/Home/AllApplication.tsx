@@ -53,10 +53,10 @@ const AllApplication = () => {
             return (
               <div
                 key={index}
-                className="shadow-[0px_0px_15px_0px_#0000001A] p-4 sm:p-6 my-4 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0"
+                className="shadow-[0px_0px_15px_0px_#0000001A]  p-4 sm:p-6 my-4 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0"
               >
                 <div className="flex items-start sm:items-center gap-4 sm:gap-5 w-full">
-                  <section className="flex justify-center items-center rounded-2xl h-[50px] w-[50px] sm:h-[60px] sm:w-[60px] bg-[#FC8019]">
+                  <section className="flex  justify-center items-center sm:rounded-2xl rounded-sm h-[45px] w-[50px] sm:h-[50px] sm:w-[50px] bg-[#FC8019]">
                     <img src={ApplicationIcon} alt="" className="h-6 sm:h-8" />
                   </section>
 

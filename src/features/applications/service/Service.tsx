@@ -22,7 +22,6 @@ export const createapplicationservice = async (data: {
 }) => {
   try {
     const response = Client.candidate.applyJob(data);
-    console.log("Apply job", response);
     return response;
   } catch (error) {
     return error;
